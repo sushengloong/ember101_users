@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Ember 101</title>
+</head>
+<body>
+  <script type="text/x-handlebars">
+    <div class="container">
+      <div class="row-fluid">
+        <ul class="nav nav-list span3 well">
+          <li><a href="#" {{action createUser}}>+ New User</a></li>
+          {{#each model}}
+          <li>{{#linkTo "user" this}}{{first}}{{/linkTo}}</li>
+          {{/each}}
+        </ul>
+        <div class="span9 well">{{outlet}}</div>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="user">
+    <h2>
+      {{first}} {{last}}
+      <img {{bindAttr src="avatar"}} class="pull-right" width="50" />
+    </h2>
+    <dl>
+      <dt>First</dt>
+      <dd>{{first}}</dd>
+      <dt>Last</dt>
+      <dd>{{last}}<dd>
+    </dl>
+    {{#linkTo "editUser" this class="btn btn-primary"}}Edit{{/linkTo}}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="editUser">
+    <h2>Edit User</h2>
+    <form class="form-inline" {{action save on="submit"}}>
+      <label>
+        First:
+        {{input type="text" value=first}}
+      </label>
+      <label>
+        {{input type="text" value=last}}
+      </label>
+      <div class="controls">
+        <button type="submit" class="btn btn-primary">Done</button>
+      </div>
+    </form>
+  </script>
+
+  <script src="http://code.jquery.com/jquery.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
+
+  <script src="http://builds.emberjs.com/handlebars-1.0.0-rc.4.js"></script>
+  <script src="http://builds.emberjs.com/ember-1.0.0-rc.6.1.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
